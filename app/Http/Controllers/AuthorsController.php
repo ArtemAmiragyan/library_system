@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Author;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::query();
+        $authors = $authors->paginate(15);
+
+        return view('authors.index', compact('authors'));
+
     }
 
     /**
@@ -41,10 +45,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Author $author)
     {
         //
     }
@@ -52,10 +56,10 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Author $author)
     {
         //
     }
@@ -64,10 +68,10 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Author $author)
     {
         //
     }
@@ -75,10 +79,10 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Author $author)
     {
         //
     }

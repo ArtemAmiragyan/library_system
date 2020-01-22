@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
+use App\Book;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::query();
+        $books = $books->paginate(5);
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -41,21 +43,21 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Review $review)
+    public function edit(Book $book)
     {
         //
     }
@@ -64,10 +66,10 @@ class ReviewController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Book $book)
     {
         //
     }
@@ -75,10 +77,10 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Review  $review
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(Book $book)
     {
         //
     }

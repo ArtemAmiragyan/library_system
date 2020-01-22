@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   return redirect('/authors');
 });
+Route::get('/authors', 'AuthorsController@index');
+
+Route::get('/books', 'BooksController@index');
+Route::get('/books/{book}', 'BooksController@show');
