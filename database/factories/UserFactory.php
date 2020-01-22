@@ -26,3 +26,32 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(App\Author::class, function (Faker $faker) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+    ];
+});
+
+$factory->define(App\Book::class, function (Faker $faker) {
+    return [
+        'author_id' => function(){
+            return factory('App\Author')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph,
+    ];
+});
+
+$factory->define( App\Review::class, function (Faker $faker){
+    return [
+        'book_id' => function(){
+            return factory('App\Book')->create()->id;
+        },
+        'user_id' => function (){
+            return factory('App\User')->create()->id;
+        },
+        'body' => $faker->paragraph,
+    ];
+});
