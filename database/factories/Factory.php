@@ -39,8 +39,8 @@ $factory->define(App\Book::class, function (Faker $faker) {
         'author_id' => function(){
             return factory('App\Author')->create()->id;
         },
-        'title' => $faker->realText(30),
-        'description' => $faker->realText(3000),
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph(100),
     ];
 });
 
