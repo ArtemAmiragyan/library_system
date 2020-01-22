@@ -10,14 +10,19 @@ class AuthorsTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function a_user_can_view_authors_list()
+    public function setUp(): void
     {
-        $author = factory('App\Author')->create();
+        parent::setUp();
 
-        $response = $this->get('/authors');
-        $response->assertSee($author->first_name);
-        $response->assertSee($author->last_name);
+        $this->author = factory('App\Author')->create();
+    }
+
+    /** @test */
+    public function a_user_can_read_authors_list()
+    {
+        $response = $this->get('/authors')
+            ->assertSee($this->author->first_name)
+            ->assertSee($this->author->last_name);
 
     }
 }

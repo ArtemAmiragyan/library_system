@@ -10,24 +10,26 @@ class BooksTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function a_user_can_view_all_books()
+    public function setUp(): void
     {
-        $book = factory('App\Book')->create();
+        parent::setUp();
 
-        $response = $this->get('/books');
-        $response->assertSee($book->title);
-        $response->assertSee($book->shortDescription);
-
+        $this->book = factory('App\Book')->create();
     }
 
     /** @test */
-    public function a_user_can_view_book()
+    public function a_user_can_read_books_list()
     {
-        $book = factory('App\Book')->create();
+        $response = $this->get('/books')
+            ->assertSee($this->book->title)
+            ->assertSee($this->book->shortDescription);
+    }
 
-        $response = $this->get('/books/' . $book->id);
-        $response->assertSee($book->title);
-        $response->assertSee($book->description);
+    /** @test */
+    public function a_user_can_read_book_page()
+    {
+        $response = $this->get('/books/' . $this->book->id)
+            ->assertSee($this->book->title)
+            ->assertSee($this->book->description);
     }
 }
