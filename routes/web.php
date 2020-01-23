@@ -15,6 +15,7 @@ Route::get('/', function () {
    return redirect('/authors');
 });
 Route::get('/authors', 'AuthorsController@index');
+Route::get('/authors/{author}', 'AuthorsController@show');
 
 Route::get('/books', 'BooksController@index');
 Route::get('/books/{book}', 'BooksController@show');

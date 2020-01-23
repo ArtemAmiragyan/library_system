@@ -10,7 +10,7 @@ class BooksTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function setUp(): void
+    function setUp(): void
     {
         parent::setUp();
 
@@ -18,7 +18,7 @@ class BooksTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_books_list()
+    function a_user_can_read_books_list()
     {
         $response = $this->get('/books')
             ->assertSee($this->book->title)
@@ -26,10 +26,11 @@ class BooksTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_book_page()
+    function a_user_can_read_book_page()
     {
         $response = $this->get('/books/' . $this->book->id)
             ->assertSee($this->book->title)
             ->assertSee($this->book->description);
     }
+
 }

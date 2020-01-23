@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <table class="table" style="margin-top: 10pxts">
+    <table class="table" style="margin-top: 10px">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -12,7 +12,7 @@
         </thead>
         <tbody>
         @foreach($authors as $author)
-        <tr>
+        <tr onmouseout="this.style.color =''" onmouseover="this.style.color = '#ededed'; this.style.cursor= 'pointer'" onclick="document.location = '{{$author->path()}}';">
             <th scope="row">{{$loop->index+1}}</th>
             <td>{{$author->first_name}}</td>
             <td>{{$author->last_name}}</td>

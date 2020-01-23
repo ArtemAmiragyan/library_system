@@ -10,7 +10,7 @@ class AuthorsTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function setUp(): void
+    function setUp(): void
     {
         parent::setUp();
 
@@ -18,11 +18,19 @@ class AuthorsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_authors_list()
+    function a_user_can_read_authors_list()
     {
         $response = $this->get('/authors')
             ->assertSee($this->author->first_name)
             ->assertSee($this->author->last_name);
 
+    }
+
+    /** @test */
+    function a_user_can_read_author_page()
+    {
+        $response = $this->get('/authors/' . $this->author->id)
+            ->assertSee($this->author->first_name)
+            ->assertSee($this->author->last_name);
     }
 }

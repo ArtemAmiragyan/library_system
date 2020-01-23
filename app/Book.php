@@ -15,4 +15,9 @@ class Book extends Model
     {
         return mb_substr($this->description, 0, 200);
     }
+
+    public function Author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }
