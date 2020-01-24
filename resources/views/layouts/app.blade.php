@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/books">Books</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books/create">+</a>
+                    </li>
                 </ul>
             </div>
         </nav>

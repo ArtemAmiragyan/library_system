@@ -3,14 +3,15 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class BooksTest extends TestCase
+class ReadBooksTest extends TestCase
 {
     use DatabaseMigrations;
 
-    function setUp(): void
+    protected $book;
+
+    public function setUp():void
     {
         parent::setUp();
 
@@ -18,19 +19,18 @@ class BooksTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_read_books_list()
+    public function a_user_can_view_all_books()
     {
-        $response = $this->get('/books')
+        $this->get('/books')
             ->assertSee($this->book->title)
             ->assertSee($this->book->shortDescription);
     }
 
     /** @test */
-    function a_user_can_read_book_page()
+    function a_user_can_read_a_single_book()
     {
-        $response = $this->get('/books/' . $this->book->id)
+        $this->get($this->book->path())
             ->assertSee($this->book->title)
             ->assertSee($this->book->description);
     }
-
 }

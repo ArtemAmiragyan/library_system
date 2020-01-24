@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Book;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -37,7 +38,32 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'author' => 'required|regex:/ /m',
+            'description' => 'required|min:30'
+        ]);
+
+        $author = Author::query();
+
+        $authorName = explode(" ",request('author'));
+
+        if(!isset($author->where('first_name', $authorName[0])->where('last_name', $authorName[1])->first()->id)){
+            $author->create([
+                'first_name'=>$authorName[0],
+                'last_name' => $authorName[1],
+            ]);
+        }
+
+        $authorId = $author->where('first_name', $authorName[0])->where('last_name', $authorName[1])->first()->id;
+
+        $book = Book::create([
+            'title' => request('title'),
+            'description' => request('description'),
+            'author_id' => $authorId,
+        ]);
+
+        return redirect($book->path());
     }
 
     /**
