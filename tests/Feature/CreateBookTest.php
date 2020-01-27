@@ -1,25 +1,14 @@
 <?php
 
-namespaceTests\Feature;
+namespace Tests\Feature;
 
+use App\Book;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class CreateBookTest extends TestCase
 {
     use DatabaseMigrations;
-
-    /** @test */
-    function a_user_can_create_new_books()
-    {
-        $book = make('App\Book');
-
-        $response = $this->post('/books', $book->toArray());
-
-        $this->get($response->headers->get('Location'))
-            ->assertSee($book->title)
-            ->assertSee($book->body);
-    }
 
     /** @test */
     function a_book_requires_a_title()
@@ -29,7 +18,7 @@ class CreateBookTest extends TestCase
     }
 
     /** @test */
-    function a_thread_requires_a_body()
+    function a_book_requires_a_description()
     {
         $this->publishBook(['description' => null])
             ->assertSessionHasErrors('description');
@@ -37,7 +26,7 @@ class CreateBookTest extends TestCase
 
     protected function publishBook($overrides = [])
     {;
-        $book = make('App\Book', $overrides);
+        $book = factory(Book::class, $overrides)->make();
 
         return $this->post('/books', $book->toArray());
     }

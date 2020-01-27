@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Book;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-
 class ReadBooksTest extends TestCase
 {
     use DatabaseMigrations;
@@ -15,7 +15,7 @@ class ReadBooksTest extends TestCase
     {
         parent::setUp();
 
-        $this->book = factory('App\Book')->create();
+        $this->book = factory(Book::class)->create();
     }
 
     /** @test */

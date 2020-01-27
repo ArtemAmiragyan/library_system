@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container" xmlns:justify-content="http://www.w3.org/1999/xhtml">
-            <ul class="list-group" style="margin-top: 10px">
+            <ul class="list-group">
                 @foreach($books as $book)
                 <li class="list-group-item">
                     <a href="{{$book->path()}}">

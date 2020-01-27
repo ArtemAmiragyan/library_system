@@ -14,8 +14,12 @@
 Route::get('/', function () {
    return redirect('/authors');
 });
-Route::get('/authors', 'AuthorsController@index');
-Route::get('/authors/{author}', 'AuthorsController@show');
 
-Route::resource('books', 'BooksController');
+Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'create', 'store']]);
 
+Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index','store']]);
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

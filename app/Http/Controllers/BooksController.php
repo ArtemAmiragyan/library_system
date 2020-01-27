@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Author;
 use App\Book;
+use App\Http\Requests\Book\StoreBook;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -27,7 +28,9 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        $authors = Author::all();
+
+        return view('books.create', compact('authors'));
     }
 
     /**
@@ -36,31 +39,12 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBook $request)
     {
-        $this->validate($request, [
-            'title' => 'required|max:255',
-            'author' => 'required|regex:/ /m',
-            'description' => 'required|min:30'
-        ]);
-
-        $author = Author::query();
-
-        $authorName = explode(" ",request('author'));
-
-        if(!isset($author->where('first_name', $authorName[0])->where('last_name', $authorName[1])->first()->id)){
-            $author->create([
-                'first_name'=>$authorName[0],
-                'last_name' => $authorName[1],
-            ]);
-        }
-
-        $authorId = $author->where('first_name', $authorName[0])->where('last_name', $authorName[1])->first()->id;
-
         $book = Book::create([
             'title' => request('title'),
             'description' => request('description'),
-            'author_id' => $authorId,
+            'author_id' => request('author_id'),
         ]);
 
         return redirect($book->path());

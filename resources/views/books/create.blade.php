@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h4 style="text-align: center; margin-top: 10px">Add book</h4>
+        <h4 style="text-align: center">Add book</h4>
 
         <form method="POST" action="/books">
             {{ csrf_field() }}
@@ -12,8 +12,14 @@
             </div>
 
             <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" id="author" name='author'>
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Author</label>
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="author_id">
+                    <option selected value="">Choose...</option>
+                    @foreach($authors as $author)
+                        <option value="{{$author->id}}">{{$author->first_name}} {{$author->last_name}}</option>
+                    @endforeach
+                </select>
+                <a href="/authors/create">New Author</a>
             </div>
 
             <div class="form-group">

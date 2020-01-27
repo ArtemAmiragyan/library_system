@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <table class="table" style="margin-top: 10px">
+    <table class="table">
         <thead>
         <tr>
             <th scope="col">#</th>

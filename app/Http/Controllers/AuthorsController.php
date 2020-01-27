@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Author;
+use App\Http\Requests\Author\StoreAuthor;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -28,7 +29,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -37,9 +38,15 @@ class AuthorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAuthor $request)
     {
-        //
+        $author = Author::create([
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'biography' => request('biography'),
+        ]);
+
+        return redirect($author->path());
     }
 
     /**
