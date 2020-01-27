@@ -19,7 +19,7 @@ class Book extends Model
 
     public function getShortDescriptionAttribute()
     {
-        return mb_substr($this->description, 0, 200);
+        return mb_substr($this->description, 0, 60);
     }
 
     public function author()

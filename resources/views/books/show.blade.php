@@ -11,8 +11,8 @@
                         </a>
                     </h6>
                 </li>
-                <li class="list-group-item">
-                    <p>{{$book->description}}</p>
+                <li class="list-group-item" style="word-wrap:break-word">
+                    {{$book->description}}
                 </li>
         </ul>
 

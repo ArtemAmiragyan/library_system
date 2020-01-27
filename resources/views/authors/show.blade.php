@@ -3,10 +3,13 @@
     <div class="container">
         <div class="media">
             <div class="media-body">
+
                 <h2 class="mt-0" style="text-align: center">{{$author->first_name}} {{$author->last_name}} </h2>
+
                 <blockquote class="blockquote text-center">
                     <p class="mb-0">{{$author->biography}}</p>
                 </blockquote>
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -28,6 +31,9 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <a href="/books/create">Add new Book</a>
+
             </div>
         </div>
     </div>
