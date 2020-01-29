@@ -13,10 +13,19 @@ class AuthorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $authors = Author::query();
-        $authors = $authors->paginate(15);
+
+        if ($request->has('lessThree')){
+
+            $authors = $authors->withCount('books')
+                ->having('books_count', '<', 3)
+                ->get();
+        }
+
+        $authors=$authors->paginate(15);
+
 
         return view('authors.index', compact('authors'));
 
@@ -40,11 +49,7 @@ class AuthorsController extends Controller
      */
     public function store(StoreAuthor $request)
     {
-        $author = Author::create([
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'biography' => request('biography'),
-        ]);
+        $author = Author::create($request->all());
 
         return redirect($author->path());
     }

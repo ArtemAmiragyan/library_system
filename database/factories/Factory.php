@@ -40,7 +40,6 @@ $factory->define(App\Book::class, function (Faker $faker) {
     return [
         'author_id' => function(){
             return factory(Author::class)->create()->id;
-//            return App\Author::inRandomOrder()->first()->id;
         },
         'title' => $faker->sentence,
         'description' => $faker->paragraph(100),

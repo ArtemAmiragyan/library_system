@@ -1,13 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="media">
-            <div class="media-body">
-
                 <h2 class="mt-0" style="text-align: center">{{$author->first_name}} {{$author->last_name}} </h2>
 
                 <blockquote class="blockquote text-center">
-                    <p class="mb-0">{{$author->biography}}</p>
+                    <p class="mb-0" style="word-wrap:break-word">{{$author->biography}}</p>
                 </blockquote>
 
                 <table class="table">
@@ -34,7 +31,5 @@
 
                 <a href="/books/create">Add new Book</a>
 
-            </div>
-        </div>
     </div>
 @endsection

@@ -15,7 +15,7 @@ Route::get('/', function () {
    return redirect('/authors');
 });
 
-Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'create', 'store','destroy']]);
+Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'create', 'store']]);
 
 Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index','store']]);
 

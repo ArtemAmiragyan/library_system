@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
-      'first_name', 'last_name', 'biography',
+        'first_name',
+        'last_name',
+        'biography',
     ];
-    public function path()
+
+    public function path() : string
     {
         return '/authors/' . $this->id;
     }
@@ -18,10 +23,5 @@ class Author extends Model
     {
         return $this->hasMany(Book::class);
     }
-    protected function publishAuthor($overrides = [])
-    {;
-        $book = factory(Author::class, $overrides)->make();
 
-        return $this->post('/authors', $book->toArray());
-    }
 }

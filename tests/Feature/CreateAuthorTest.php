@@ -12,6 +12,17 @@ class CreateAuthorTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
+    function a_user_can_create_new_author()
+    {
+        $author = factory(Author::class)->create();
+
+        $this->post('/authors', $author->toArray());
+
+        $this->get($author->path())
+            ->assertSee($author->first_name);
+    }
+
+    /** @test */
     function a_author_requires_a_first_name()
     {
         $this->publishAuthor(['first_name' => null])
