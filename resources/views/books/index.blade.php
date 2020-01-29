@@ -2,6 +2,24 @@
 
 @section('content')
     <div class="container" xmlns:justify-content="http://www.w3.org/1999/xhtml">
+
+        <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                </div>
+
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" type="search" name="book" placeholder="Search a book">
+                </div>
+
+                <div class="col-auto">
+                    <button class="btn btn-lg btn-light" type="submit">Search</button>
+                </div>
+
+            </div>
+        </form>
+
             <ul class="list-group">
                 @foreach($books as $book)
                 <li class="list-group-item">

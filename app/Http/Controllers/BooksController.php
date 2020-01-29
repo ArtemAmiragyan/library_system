@@ -14,9 +14,15 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $books = Book::query();
+
+        if ( $request->has('book') && trim($request->input('book')) !== '' )
+        {
+            $books = $books->where('title', 'LIKE', trim($request->input('book')) . '%');
+        }
+
         $books = $books->paginate(5);
         return view('books.index', compact('books'));
     }
@@ -41,11 +47,7 @@ class BooksController extends Controller
      */
     public function store(StoreBook $request)
     {
-        $book = Book::create([
-            'title' => request('title'),
-            'description' => request('description'),
-            'author_id' => request('author_id'),
-        ]);
+        $book = Book::create($request->all());
 
         return redirect($book->path());
     }
@@ -67,9 +69,9 @@ class BooksController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Request $request, Book $book)
     {
-        //
+       //
     }
 
     /**
@@ -92,6 +94,8 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect('/books');
     }
 }

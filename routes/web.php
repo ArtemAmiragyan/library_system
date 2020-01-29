@@ -17,8 +17,7 @@ Route::get('/', function () {
 
 Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'create', 'store']]);
 
-Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index','store']]);
-
+Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index','store', 'destroy', 'edit']]);
 
 Auth::routes();
 

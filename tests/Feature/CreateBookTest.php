@@ -11,6 +11,17 @@ class CreateBookTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
+    function a_user_can_create_new_book()
+    {
+        $book = factory(Book::class)->create();
+
+        $this->post('/books', $book->toArray());
+
+        $this->get($book->path())
+            ->assertSee($book->title);
+    }
+
+    /** @test */
     function a_book_requires_a_title()
     {
         $this->publishBook(['title' => null])
@@ -24,10 +35,22 @@ class CreateBookTest extends TestCase
             ->assertSessionHasErrors('description');
     }
 
+    /** @test */
+    function a_book_can_be_deleted()
+    {
+        $book = factory('App\Book')->create();
+
+        $response = $this->json('DELETE', $book->path());
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('books', [$book->id]);
+    }
+
     protected function publishBook($overrides = [])
-    {;
+    {
         $book = factory(Book::class, $overrides)->make();
 
-        return $this->post('/books', $book->toArray());
+        return $this->post('/books', $book->toArray() + ['g-recaptcha-response' => 'token']);
     }
 }
