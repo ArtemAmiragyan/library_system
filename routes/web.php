@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-   return redirect('/authors');
+    return redirect('/authors');
 });
 
 Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'create', 'store']]);
 
-Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index','store', 'destroy', 'edit']]);
+Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index', 'store', 'destroy', 'edit', 'update']]);
 
 Auth::routes();
 

@@ -6,6 +6,7 @@ use App\Author;
 use App\Book;
 use App\Http\Requests\Book\StoreBook;
 use Illuminate\Http\Request;
+use App\Http\Requests\Book\UpdateBookRequest;
 
 class BooksController extends Controller
 {
@@ -18,8 +19,7 @@ class BooksController extends Controller
     {
         $books = Book::query();
 
-        if ( $request->has('book') && trim($request->input('book')) !== '' )
-        {
+        if ($request->has('book')) {
             $books = $books->where('title', 'LIKE', trim($request->input('book')) . '%');
         }
 
@@ -42,7 +42,7 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBook $request)
@@ -55,7 +55,7 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
@@ -66,30 +66,33 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Book $book)
+    public function edit(Book $book)
     {
-       //
+        $authors = Author::all();
+        return view('books.edit', compact('book', 'authors'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
+
+        return redirect($book->path());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function destroy(Book $book)
