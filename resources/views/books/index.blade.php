@@ -10,7 +10,8 @@
                 </div>
 
                 <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" type="search" name="book" placeholder="Search a book">
+                    <input class="form-control form-control-lg form-control-borderless" type="search" name="book"
+                           placeholder="Search a book">
                 </div>
 
                 <div class="col-auto">
@@ -20,8 +21,8 @@
             </div>
         </form>
 
-            <ul class="list-group">
-                @foreach($books as $book)
+        <ul class="list-group">
+            @foreach($books as $book)
                 <li class="list-group-item">
                     <a href="{{$book->path()}}">
                         <h2>{{$book->title}}</h2>
@@ -30,8 +31,8 @@
                 <li class="list-group-item">
                     <p>{{$book->shortDescription}}...</p>
                 </li>
-                @endforeach
-                 {{$books->links()}}
-            </ul>
+            @endforeach
+            {{$books->links()}}
+        </ul>
     </div>
 @endsection

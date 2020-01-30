@@ -37,7 +37,7 @@ class CreateAuthorTest extends TestCase
     }
 
     protected function publishAuthor($overrides = [])
-    {;
+    {
         $book = factory(Author::class, $overrides)->make();
 
         return $this->post('/authors', $book->toArray());

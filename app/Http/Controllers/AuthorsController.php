@@ -17,15 +17,13 @@ class AuthorsController extends Controller
     {
         $authors = Author::query();
 
-        if ($request->has('lessThree')){
+        if ($request->has('lessThree')) {
 
-            $authors = $authors->withCount('books')
-                ->having('books_count', '<', 3)
-                ->get();
+            $authors = $authors->has('books', '<', 3);
+
         }
 
-        $authors=$authors->paginate(15);
-
+        $authors = $authors->paginate(15);
 
         return view('authors.index', compact('authors'));
 
@@ -44,7 +42,7 @@ class AuthorsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreAuthor $request)
@@ -57,7 +55,7 @@ class AuthorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Author  $author
+     * @param \App\Author $author
      * @return \Illuminate\Http\Response
      */
     public function show(Author $author)
@@ -68,7 +66,7 @@ class AuthorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Author  $author
+     * @param \App\Author $author
      * @return \Illuminate\Http\Response
      */
     public function edit(Author $author)
@@ -79,8 +77,8 @@ class AuthorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Author  $author
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Author $author
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Author $author)
@@ -91,7 +89,7 @@ class AuthorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Author  $author
+     * @param \App\Author $author
      * @return \Illuminate\Http\Response
      */
     public function destroy(Author $author)

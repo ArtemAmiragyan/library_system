@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h4 style="text-align: center">Add book</h4>
+        <h4 class="text-center">Add book</h4>
 
         <form method="POST" action="/books">
             {{ csrf_field() }}

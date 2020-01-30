@@ -40,7 +40,7 @@ class CreateBookTest extends TestCase
     {
         $book = factory('App\Book')->create();
 
-        $response = $this->json('DELETE', $book->path());
+        $response = $this->delete($book->path());
 
         $response->assertStatus(302);
 
@@ -51,6 +51,6 @@ class CreateBookTest extends TestCase
     {
         $book = factory(Book::class, $overrides)->make();
 
-        return $this->post('/books', $book->toArray() + ['g-recaptcha-response' => 'token']);
+        return $this->post('/books', $book->toArray());
     }
 }

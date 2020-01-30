@@ -16,7 +16,7 @@ class ReadAuthorsTest extends TestCase
      */
     protected $author;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -40,16 +40,14 @@ class ReadAuthorsTest extends TestCase
     /** @test */
     public function a_user_can_filter_authors_list()
     {
-        $author = factory(Author::class)->create();
-
-        $authorWithThreeBooks = factory(Author::class, ['first_name' => 'hfdhfgh'])->create()->first();
-        factory(Book::class, ['author_id' => $authorWithThreeBooks->id], 3)->create();
-        $authorWithThreeBooks->first_name = 'fhfhf';
-        $authorWithThreeBooks->save();
+        $authorWithThreeBooks = factory(Author::class)->create();
+        factory(Book::class, 3)->create([
+            'author_id' => $authorWithThreeBooks->id,
+        ]);
 
         $this->get('/authors?lessThree=on')
             ->assertSee($this->author->first_name)
-            ->assertDontSeeText($authorWithThreeBooks->first_name);
+            ->assertDontSee($authorWithThreeBooks->first_name);
     }
 
 }

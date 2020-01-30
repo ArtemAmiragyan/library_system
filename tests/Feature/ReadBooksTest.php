@@ -5,13 +5,14 @@ namespace Tests\Feature;
 use App\Book;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+
 class ReadBooksTest extends TestCase
 {
     use DatabaseMigrations;
 
     protected $book;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 

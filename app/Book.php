@@ -17,12 +17,12 @@ class Book extends Model
         'author_id',
     ];
 
-    public function path() : string
+    public function path(): string
     {
         return '/books/' . $this->id;
     }
 
-    public function getShortDescriptionAttribute() : string
+    public function getShortDescriptionAttribute(): string
     {
         return mb_substr($this->description, 0, 60);
     }

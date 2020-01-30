@@ -38,7 +38,7 @@ $factory->define(App\Author::class, function (Faker $faker) {
 
 $factory->define(App\Book::class, function (Faker $faker) {
     return [
-        'author_id' => function(){
+        'author_id' => function () {
             return factory(Author::class)->create()->id;
         },
         'title' => $faker->sentence,
@@ -46,12 +46,12 @@ $factory->define(App\Book::class, function (Faker $faker) {
     ];
 });
 
-$factory->define( App\Review::class, function (Faker $faker){
+$factory->define(App\Review::class, function (Faker $faker) {
     return [
-        'book_id' => function(){
+        'book_id' => function () {
             return factory('App\Book')->create()->id;
         },
-        'user_id' => function (){
+        'user_id' => function () {
             return factory('App\User')->create()->id;
         },
         'body' => $faker->paragraph,

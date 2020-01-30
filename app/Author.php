@@ -14,7 +14,7 @@ class Author extends Model
         'biography',
     ];
 
-    public function path() : string
+    public function path(): string
     {
         return '/authors/' . $this->id;
     }
