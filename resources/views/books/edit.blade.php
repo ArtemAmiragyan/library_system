@@ -28,10 +28,10 @@
                 <textarea name="description" id="description" class="form-control">{{$book->description}}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-secondary">Edit</button>
+            <button type="submit" class="btn btn-secondary">Update</button>
         </form>
         @if (count($errors) > 0)
-            <div class="alert alert-danger" style="margin-top: 10px;">
+            <div class="alert alert-danger m-4">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

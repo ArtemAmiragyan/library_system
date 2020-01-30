@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" xmlns:justify-content="http://www.w3.org/1999/xhtml">
-
+    <div class="container">
         <form class="card card-sm">
             <div class="card-body row no-gutters align-items-center">
                 <div class="col-auto">

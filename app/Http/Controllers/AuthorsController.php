@@ -18,9 +18,7 @@ class AuthorsController extends Controller
         $authors = Author::query();
 
         if ($request->has('lessThree')) {
-
             $authors = $authors->has('books', '<', 3);
-
         }
 
         $authors = $authors->paginate(15);

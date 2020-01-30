@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container" xmlns:justify-content="http://www.w3.org/1999/xhtml">
-        <ul class="list-group" style="margin-top: 10px">
+        <ul class="list-group m-4">
             <li class="list-group-item">
                 <h2 class="text-center break-word" >{{$book->title}}</h2>
                 <h6>Author:
@@ -15,7 +15,7 @@
                 {{$book->description}}
             </li>
         </ul>
-        <div class="row">
+        <div class="row m-4">
             <a href="{{route('books.edit', $book)}}">
                 <button type="submit" class="btn btn-link">Edit Book</button>
             </a>

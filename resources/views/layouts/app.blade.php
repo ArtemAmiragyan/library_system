@@ -22,9 +22,6 @@
        .break-word{
            word-wrap:break-word
        }
-       .text-center{
-           text-align: center;
-       }
     </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

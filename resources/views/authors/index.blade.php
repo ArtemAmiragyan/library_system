@@ -6,7 +6,7 @@
                 <h5>Filter</h5>
                 <form action="/authors">
                     {{ csrf_field() }}
-                    <div class="" style="flex-direction: column">
+                    <div class="flex-column">
                         <div class="form-group">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="lessThree" id="les_" required>
@@ -15,7 +15,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-light" type="submit" style="margin-bottom: 10px">Submit</button>
+                        <button class="btn btn-light m-0" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
