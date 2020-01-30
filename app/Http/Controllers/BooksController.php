@@ -6,6 +6,7 @@ use App\Author;
 use App\Book;
 use App\Http\Requests\Book\StoreBook;
 use Illuminate\Http\Request;
+use App\Http\Requests\Book\UpdateBookRequest;
 
 class BooksController extends Controller
 {
@@ -14,9 +15,14 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $books = Book::query();
+
+        if ($request->has('book')) {
+            $books = $books->where('title', 'LIKE', trim($request->input('book')) . '%');
+        }
+
         $books = $books->paginate(5);
         return view('books.index', compact('books'));
     }
@@ -36,16 +42,12 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBook $request)
     {
-        $book = Book::create([
-            'title' => request('title'),
-            'description' => request('description'),
-            'author_id' => request('author_id'),
-        ]);
+        $book = Book::create($request->all());
 
         return redirect($book->path());
     }
@@ -53,7 +55,7 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function show(Book $book)
@@ -64,34 +66,39 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function edit(Book $book)
     {
-        //
+        $authors = Author::all();
+        return view('books.edit', compact('book', 'authors'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
+
+        return redirect($book->path());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param \App\Book $book
      * @return \Illuminate\Http\Response
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect('/books');
     }
 }

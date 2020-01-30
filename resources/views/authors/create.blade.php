@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h4 style="text-align: center">Add Author</h4>
+        <h4 class="text-center">Add Author</h4>
 
         <form method="POST" action="/authors">
             {{ csrf_field() }}
@@ -18,13 +18,13 @@
 
             <div class="form-group">
                 <label for="biography">Biography:</label>
-                <textarea name="biography" id="biography"  class="form-control">{{old('biography')}}</textarea>
+                <textarea name="biography" id="biography" class="form-control">{{old('biography')}}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-secondary" >Publish</button>
+            <button type="submit" class="btn btn-secondary">Publish</button>
         </form>
         @if (count($errors) > 0)
-            <div class="alert alert-danger" style="margin-top: 10px;">
+            <div class="alert alert-danger m-4">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
