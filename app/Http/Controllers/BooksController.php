@@ -7,13 +7,14 @@ use App\Book;
 use App\Http\Requests\Book\StoreBook;
 use Illuminate\Http\Request;
 use App\Http\Requests\Book\UpdateBookRequest;
+use Illuminate\Http\Response;
 
 class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -30,7 +31,7 @@ class BooksController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -42,8 +43,8 @@ class BooksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreBook $request
+     * @return Response
      */
     public function store(StoreBook $request)
     {
@@ -56,7 +57,7 @@ class BooksController extends Controller
      * Display the specified resource.
      *
      * @param \App\Book $book
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Book $book)
     {
@@ -67,7 +68,7 @@ class BooksController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Book $book
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Book $book)
     {
@@ -78,9 +79,9 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Book $book
-     * @return \Illuminate\Http\Response
+     * @param UpdateBookRequest $request
+     * @param Book $book
+     * @return Response
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
@@ -92,8 +93,8 @@ class BooksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Book $book
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return Response
      */
     public function destroy(Book $book)
     {
