@@ -33,4 +33,15 @@ class ReadBooksTest extends TestCase
             ->assertSee($this->book->title);
     }
 
+    /** @test */
+    function a_user_can_search_books()
+    {
+        $notRequiredBook = factory(Book::class)->create(['title'=>'not required']);
+        $requiredBook = factory(Book::class)->create(['title'=>'foo']);
+
+        $this->get('/books?book=foo')
+            ->assertSee($requiredBook->title)
+            ->assertDontSee($notRequiredBook->title);
+    }
+
 }
