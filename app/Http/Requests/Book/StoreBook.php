@@ -26,7 +26,7 @@ class StoreBook extends FormRequest
         return [
             'title' => 'required|max:255',
             'description' => 'required|min:30',
-            'author_id' => 'required',
+            'author_id' => 'required|exists:authors,id',
         ];
     }
 }

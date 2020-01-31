@@ -83,7 +83,7 @@ class BooksController extends Controller
      * @param Book $book
      * @return Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(StoreBook $request, Book $book)
     {
         $book->update($request->all());
 
