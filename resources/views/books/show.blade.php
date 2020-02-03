@@ -27,6 +27,7 @@
                 <button type="submit" class="btn btn-link">Delete Book</button>
             </form>
         </div>
+
         <h4 class="text-center">Reviews</h4>
         @foreach($book->reviews as $review)
             <ul class="list-group m-4">
@@ -52,12 +53,21 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <textarea class="form-control" name="body"
-                                  placeholder="What you think about this book"></textarea>
+                                  placeholder="What you think about this book">{{old('body')}}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-light">Post</button>
                 </form>
             </div>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger m-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         @else
             <p>Please <a href="{{route('login')}}">sign in </a>to write a review</p>
         @endif
