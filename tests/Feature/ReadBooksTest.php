@@ -55,7 +55,8 @@ class ReadBooksTest extends TestCase
         $this->post($this->book->path(), $review->toArray());
 
         $this->get($this->book->path())
-            ->assertSee($review->body);
+            ->assertSee($review->body)
+            ->assertSee($review->assessment);
     }
 
     /** @test */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Book;
 use App\Http\Requests\Book\StoreBook;
+use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Requests\Book\UpdateBookRequest;
 use Illuminate\Http\Response;
@@ -56,12 +57,21 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Book $book
+     * @param Book $book
+     * @param Review $review
      * @return Response
      */
-    public function show(Book $book)
+    public function show(Book $book, Review $review)
     {
-        return view('books.show', compact('book'));
+        $review = Review::query();
+
+        $reviews = $review->where('book_id', $book->id)->pluck('assessment')->toArray();
+        if (count($reviews) > 0) {
+            $assessment = round(array_sum($reviews) / count($reviews));
+        } else {
+            $assessment = null;
+        }
+        return view('books.show', compact('book', 'assessment'));
     }
 
     /**

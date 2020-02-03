@@ -10,6 +10,11 @@
                         {{$book->author->first_name}} {{$book->author->last_name}}
                     </a>
                 </h6>
+                @if($assessment != null)
+                    <small class="text-muted">Rating:
+                        {{$assessment}}
+                    </small>
+                @endif
             </li>
             <li class="list-group-item break-word">
                 {{$book->description}}
@@ -55,7 +60,17 @@
                         <textarea class="form-control" name="body"
                                   placeholder="What you think about this book">{{old('body')}}</textarea>
                     </div>
-
+                    <h6>Leave a rating!</h6>
+                    <div class="form-group">
+                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="assessment">
+                            <option value="">Choose...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-light">Post</button>
                 </form>
             </div>

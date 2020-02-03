@@ -48,6 +48,7 @@ class ReviewsController extends Controller
     {
         $book->addReview([
             'body' => request('body'),
+            'assessment' => request('assessment'),
             'user_id' => auth()->id(),
         ]);
 

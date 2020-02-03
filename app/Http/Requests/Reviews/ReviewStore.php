@@ -25,6 +25,7 @@ class ReviewStore extends FormRequest
     {
         return [
             'body' => 'required|min:10',
+            'assessment' => 'required'
         ];
     }
 }
