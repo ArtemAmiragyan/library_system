@@ -19,7 +19,7 @@ Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'cr
 
 Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index', 'store', 'destroy', 'edit', 'update']]);
 
-Route::post('/books/{book}/', 'ReviewsController@store');
+Route::post('/books/{book}/', 'ReviewsController@store')->name('review');
 
 Auth::routes();
 

@@ -15,7 +15,7 @@ class Review extends Model
     protected $guarded = [];
 
     /**
-     * A reply has an owner.
+     * A review has an owner.
      *
      * @return BelongsTo
      */

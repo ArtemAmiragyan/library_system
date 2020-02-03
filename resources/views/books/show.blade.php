@@ -36,7 +36,8 @@
                     </div>
                 </li>
                 <li class="list-group-item break-word">
-                    {{$review->body}}
+                    {{$review->body}}<br>
+                    <small>assessment: {{$review->assessment}}</small>
                 </li>
                 <li class="list-group-item break-word">
                     <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
@@ -47,7 +48,7 @@
         @if (auth()->check())
             <div class="column">
                 <h5>Write a review!</h5>
-                <form method="POST" action="{{route('books.update')}}">
+                <form method="POST" action="{{route('review', ['book' => $book->id])}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <textarea class="form-control" name="body"

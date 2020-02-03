@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Reviews\ReviewStore;
 use App\Review;
 use App\Book;
 use Illuminate\Http\RedirectResponse;
@@ -43,11 +44,11 @@ class ReviewsController extends Controller
      * @param Book $book
      * @return RedirectResponse
      */
-    public function store(Book $book)
+    public function store(ReviewStore $request, Book $book)
     {
         $book->addReview([
             'body' => request('body'),
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         return back();

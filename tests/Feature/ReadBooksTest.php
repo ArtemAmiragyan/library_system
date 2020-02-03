@@ -46,7 +46,7 @@ class ReadBooksTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_create_new_reply()
+    function a_user_can_create_new_review()
     {
         $review = factory(Review::class)->create([
             'book_id' => $this->book->id,
