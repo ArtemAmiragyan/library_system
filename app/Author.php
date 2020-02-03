@@ -21,7 +21,7 @@ class Author extends Model
      *
      * @return string
      */
-    public function path()
+    public function path(): string
     {
         return '/authors/' . $this->id;
     }

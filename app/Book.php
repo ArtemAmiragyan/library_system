@@ -23,7 +23,7 @@ class Book extends Model
      *
      * @return string
      */
-    public function path()
+    public function path(): string
     {
         return '/books/' . $this->id;
     }
@@ -33,7 +33,7 @@ class Book extends Model
      *
      * @return string
      */
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string
     {
         return mb_substr($this->description, 0, 60);
     }

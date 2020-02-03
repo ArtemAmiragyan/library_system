@@ -27,7 +27,7 @@
                 <button type="submit" class="btn btn-link">Delete Book</button>
             </form>
         </div>
-
+        <h4 class="text-center">Reviews</h4>
         @foreach($book->reviews as $review)
             <ul class="list-group m-4">
                 <li class="list-group-item break-word">
@@ -47,7 +47,7 @@
         @if (auth()->check())
             <div class="column">
                 <h5>Write a review!</h5>
-                <form method="POST" action="{{$book->path()}}">
+                <form method="POST" action="{{route('books.update')}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <textarea class="form-control" name="body"

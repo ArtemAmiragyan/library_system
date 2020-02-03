@@ -36,8 +36,9 @@ class UpdateBooksTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('books', [
+            'id' => $book->id,
             'author_id' => $changedAuthor->id,
-            'id' => $book->id, 'title' => 'Changed',
+            'title' => 'Changed',
             'description' => 'This is a modified book description with more than thirty characters for validation',
         ]);
     }
