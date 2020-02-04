@@ -33,7 +33,7 @@ class ReadAuthorsTest extends TestCase
     /** @test */
     public function a_user_can_view_author()
     {
-        $this->get($this->author->path())
+        $this->get("/authors/{$this->author->id}")
             ->assertSee($this->author->first_name);
     }
 

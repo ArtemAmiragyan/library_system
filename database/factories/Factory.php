@@ -55,5 +55,6 @@ $factory->define(App\Review::class, function (Faker $faker) {
             return factory('App\User')->create()->id;
         },
         'body' => $faker->paragraph,
+        'assessment' => random_int(0,5),
     ];
 });

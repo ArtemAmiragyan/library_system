@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Book;
+use App\Author;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use Tests\TestCase;
 
 class UpdateBooksTest extends TestCase
@@ -23,13 +23,23 @@ class UpdateBooksTest extends TestCase
     /** @test */
     function a_book_can_be_updated()
     {
-        $book = factory(Book::class)->create();
+        $author = factory(Author::class)->create();
+        $changedAuthor = factory(Author::class)->create();
+        $book = factory(Book::class)->create([
+            'author_id' => $author->id,
+        ]);
 
         $this->put($book->path(), [
             'title' => 'Changed',
-            'description' => 'This is a modified book description with more than thirty characters for validation'
+            'author_id' => $changedAuthor->id,
+            'description' => 'This is a modified book description with more than thirty characters for validation',
         ]);
 
-        $this->assertDatabaseHas('books', ['id' => $book->id, 'title' => 'Changed', 'description' => 'This is a modified book description with more than thirty characters for validation']);
+        $this->assertDatabaseHas('books', [
+            'id' => $book->id,
+            'author_id' => $changedAuthor->id,
+            'title' => 'Changed',
+            'description' => 'This is a modified book description with more than thirty characters for validation',
+        ]);
     }
 }

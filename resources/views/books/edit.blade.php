@@ -17,7 +17,9 @@
                     <option selected
                             value="{{$book->author->id}}">{{$book->author->first_name}} {{$book->author->last_name}}</option>
                     @foreach($authors as $author)
-                        <option value="{{$author->id}}">{{$author->first_name}} {{$author->last_name}}</option>
+                        @if(! ($book->author->id == $author->id))
+                            <option value="{{$author->id}}">{{$author->first_name}} {{$author->last_name}}</option>
+                        @endif
                     @endforeach
                 </select>
                 <a href="/authors/create">New Author</a>

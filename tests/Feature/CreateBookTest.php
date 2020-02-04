@@ -13,12 +13,13 @@ class CreateBookTest extends TestCase
     /** @test */
     function a_user_can_create_new_book()
     {
-        $book = factory(Book::class)->create();
+        $book = factory(Book::class)->make([
+            'title' => 'Some Title'
+        ]);
 
         $this->post('/books', $book->toArray());
-
-        $this->get($book->path())
-            ->assertSee($book->title);
+        $this->get("/books/{$book->id}")
+            ->assertSee('Some Title');
     }
 
     /** @test */
@@ -40,7 +41,7 @@ class CreateBookTest extends TestCase
     {
         $book = factory('App\Book')->create();
 
-        $response = $this->delete($book->path());
+        $response = $this->delete("/books/{$book->id}");
 
         $response->assertStatus(302);
 

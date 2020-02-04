@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Reviews\ReviewStore;
 use App\Review;
+use App\Book;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ReviewsController extends Controller
 {
+    /**
+     * Create a new ReviewsController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,14 +39,20 @@ class ReviewsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Persist a new review.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Book $book
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ReviewStore $request, Book $book)
     {
-        //
+        $book->addReview([
+            'body' => request('body'),
+            'assessment' => request('assessment'),
+            'user_id' => auth()->id(),
+        ]);
+
+        return back();
     }
 
     /**
