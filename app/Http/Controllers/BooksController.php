@@ -67,11 +67,7 @@ class BooksController extends Controller
 
         $review = Review::query();
 
-        $reviews = $review->where('book_id', $book->id)->pluck('assessment')->toArray();
-
-        if (count($reviews) > 0) {
-            $assessment = round(array_sum($reviews) / count($reviews));
-        }
+        $assessment = round($review->where('book_id', $book->id)->average('assessment'));
 
         return view('books.show', compact('book', 'assessment'));
     }
