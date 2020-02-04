@@ -10,11 +10,15 @@ class Author extends Model
     public $timestamps = false;
 
     /**
-     * Don't auto-apply mass assignment protection.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'biography',
+    ];
 
     /**
      * Get a string path for the Author.

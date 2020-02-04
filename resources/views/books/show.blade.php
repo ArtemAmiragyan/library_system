@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" xmlns:justify-content="http://www.w3.org/1999/xhtml">
+    <div class="container">
         <ul class="list-group m-4">
             <li class="list-group-item">
                 <h2 class="text-center break-word">{{$book->title}}</h2>

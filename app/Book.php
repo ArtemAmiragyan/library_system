@@ -12,11 +12,15 @@ class Book extends Model
     use SoftDeletes;
 
     /**
-     * Don't auto-apply mass assignment protection.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'author_id',
+        'description'
+    ];
 
     /**
      * Get a string path for the book.

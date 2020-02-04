@@ -18,7 +18,7 @@ class CreateAuthorTest extends TestCase
 
         $this->post('/authors', $author->toArray());
 
-        $this->get($author->path())
+        $this->get("/authors/{$author->id}")
             ->assertSee($author->first_name);
     }
 

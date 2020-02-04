@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Review extends Model
 {
     /**
-     * Don't auto-apply mass assignment protection.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'body',
+        'assessment',
+        'user_id',
+        'book_id',
+    ];
 
     /**
      * A review has an owner.
@@ -23,4 +28,5 @@ class Review extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 }

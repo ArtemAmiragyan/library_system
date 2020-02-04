@@ -30,7 +30,7 @@ class ReadBooksTest extends TestCase
     /** @test */
     function a_user_can_read_a_single_book()
     {
-        $this->get($this->book->path())
+        $this->get("/books/{$this->book->id}")
             ->assertSee($this->book->title);
     }
 
@@ -41,22 +41,21 @@ class ReadBooksTest extends TestCase
             'book_id' => $this->book->id,
         ]);
 
-        $this->get($this->book->path())
+        $this->get("/books/{$this->book->id}")
             ->assertSee($review->body);
     }
 
     /** @test */
     function a_user_can_create_new_review()
     {
-        $review = factory(Review::class)->create([
-            'book_id' => $this->book->id,
-        ]);
+        $this->signIn();
 
-        $this->post($this->book->path(), $review->toArray());
+        $review = factory(Review::class)->make();
+        $this->post("/books/{$this->book->id}/",$review->toArray());
 
-        $this->get($this->book->path())
-            ->assertSee($review->body)
-            ->assertSee($review->assessment);
+        $this->get("/books/{$this->book->id}")
+            ->assertSee($review->body);
+
     }
 
     /** @test */
