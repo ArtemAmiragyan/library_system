@@ -47,7 +47,8 @@ class AuthorsController extends Controller
     {
         $author = Author::create($request->all());
 
-        return redirect($author->path());
+        return redirect($author->path())
+            ->with('flash', 'Author has been published!');;
     }
 
     /**

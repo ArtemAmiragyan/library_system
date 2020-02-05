@@ -34,22 +34,6 @@
         </div>
 
         <h4 class="text-center">Reviews</h4>
-        @foreach($book->reviews as $review)
-            <ul class="list-group m-4">
-                <li class="list-group-item break-word">
-                    <div class="row">
-                        <h6>{{$review->owner->name}}</h6>
-                    </div>
-                </li>
-                <li class="list-group-item break-word">
-                    {{$review->body}}<br>
-                    <small>assessment: {{$review->assessment}}</small>
-                </li>
-                <li class="list-group-item break-word">
-                    <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
-                </li>
-            </ul>
-        @endforeach
 
         @if (auth()->check())
             <div class="column">
@@ -74,6 +58,7 @@
                     <button type="submit" class="btn btn-light">Post</button>
                 </form>
             </div>
+
             @if (count($errors) > 0)
                 <div class="alert alert-danger m-4">
                     <ul>
@@ -86,5 +71,22 @@
         @else
             <p>Please <a href="{{route('login')}}">sign in </a>to write a review</p>
         @endif
+        @foreach($book->reviews as $review)
+            <ul class="list-group m-4">
+                <li class="list-group-item break-word">
+                    <div class="row">
+                        <h6>{{$review->owner->name}}</h6>
+                    </div>
+                </li>
+                <li class="list-group-item break-word">
+                    {{$review->body}}<br>
+                    <small>assessment: {{$review->assessment}}</small>
+                </li>
+                <li class="list-group-item break-word">
+                    <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
+                </li>
+            </ul>
+        @endforeach
+
     </div>
 @endsection

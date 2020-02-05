@@ -51,7 +51,8 @@ class BooksController extends Controller
     {
         $book = Book::create($request->all());
 
-        return redirect($book->path());
+        return redirect($book->path())
+            ->with('flash', 'Book has been published!');
     }
 
     /**
