@@ -77,7 +77,11 @@
             <ul class="list-group m-4">
                 <li class="list-group-item break-word">
                     <div class="row">
-                        <h6>{{$review->owner->name}}</h6>
+                        <h6>
+                            <a href="{{route('profile', $review->owner->id)}}">
+                                {{$review->owner->name}}
+                            </a>
+                        </h6>
                     </div>
                 </li>
                 <li class="list-group-item break-word">

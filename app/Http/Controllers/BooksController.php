@@ -66,8 +66,6 @@ class BooksController extends Controller
     {
         $assessment = null;
 
-        $review = Review::query();
-
         $assessment = round($review->where('book_id', $book->id)->average('assessment'));
 
         return view('books.show', compact('book', 'assessment'));
@@ -106,8 +104,9 @@ class BooksController extends Controller
      * @param Book $book
      * @return Response
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book, Review $review)
     {
+        $review->where('book_id', $book->id)->delete();
         $book->delete();
 
         return redirect('/books')

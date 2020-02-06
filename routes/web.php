@@ -23,4 +23,5 @@ Route::post('/books/{book}/', 'ReviewsController@store')->name('review');
 
 Auth::routes();
 
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
 Route::get('/home', 'HomeController@index')->name('home');

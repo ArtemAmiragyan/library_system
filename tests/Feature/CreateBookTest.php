@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Book;
+use App\Review;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -40,12 +41,14 @@ class CreateBookTest extends TestCase
     function a_book_can_be_deleted()
     {
         $book = factory('App\Book')->create();
+        $review = factory(Review::class)->create(['book_id' => $book->id]);
 
         $response = $this->delete("/books/{$book->id}");
 
         $response->assertStatus(302);
 
         $this->assertDatabaseMissing('books', [$book->id]);
+        $this->assertDatabaseMissing('reviews', [$review->id]);
     }
 
     protected function publishBook($overrides = [])
