@@ -96,7 +96,8 @@ class BooksController extends Controller
     {
         $book->update($request->all());
 
-        return redirect($book->path());
+        return redirect($book->path())
+            ->with('flash', 'Book has been updated!');
     }
 
     /**
@@ -109,6 +110,7 @@ class BooksController extends Controller
     {
         $book->delete();
 
-        return redirect('/books');
+        return redirect('/books')
+            ->with('flash', 'Book has been deleted!');;
     }
 }

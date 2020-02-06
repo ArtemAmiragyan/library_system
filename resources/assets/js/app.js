@@ -15,7 +15,8 @@ window.Vue = require('vue');
  *
  */
 
-Vue.component('flash', require('./components/Flash.vue').default);
+Vue.component('flash-success', require('./components/FlashSuccess.vue').default);
+Vue.component('flash-error', require('./components/FlashError.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

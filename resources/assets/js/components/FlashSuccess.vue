@@ -38,6 +38,7 @@
 
 <style>
     .alert-flash {
+        z-index: 1;
         position: fixed;
         padding-left: 50px;
         right: 25px;

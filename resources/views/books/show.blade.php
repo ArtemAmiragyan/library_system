@@ -46,7 +46,8 @@
                     </div>
                     <h6>Leave a rating!</h6>
                     <div class="form-group">
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="assessment">
+                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                                name="assessment">
                             <option value="">Choose...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -60,6 +61,7 @@
             </div>
 
             @if (count($errors) > 0)
+                <flash-error></flash-error>
                 <div class="alert alert-danger m-4">
                     <ul>
                         @foreach ($errors->all() as $error)

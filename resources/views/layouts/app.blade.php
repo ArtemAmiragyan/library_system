@@ -16,9 +16,9 @@
 
     <!-- Styles -->
     <style>
-       .break-word{
-           word-wrap:break-word
-       }
+        .break-word {
+            word-wrap: break-word
+        }
     </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -95,7 +95,7 @@
             @yield('content')
         </main>
     </div>
-    <flash message="{{ session('flash') }}"></flash>
+    <flash-success message="{{ session('flash') }}"></flash-success>
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
