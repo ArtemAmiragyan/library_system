@@ -20,18 +20,30 @@
             </div>
         </form>
 
-        <ul class="list-group">
-            @foreach($books as $book)
-                <li class="list-group-item">
-                    <a href="{{$book->path()}}">
-                        <h2>{{$book->title}}</h2>
-                    </a>
-                </li>
-                <li class="list-group-item">
+
+        @foreach($books as $book)
+            <ul class="list-group mt-3">
+                <div class="list-group-item flex-column">
+                    <div class="d-flex justify-content-between">
+                        <a class href="{{$book->path()}}">
+                            <h2>{{$book->title}}</h2>
+                        </a>
+                        <form method="POST" action="{{route('favorite', ['book' => $book->id])}}">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-light" {{$book->isFavorited() ? 'disabled' : '' }}>
+                                    {{ $book->favorites_count }} Favorite
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="list-group-item">
                     <p>{{$book->shortDescription}}...</p>
-                </li>
-            @endforeach
-            {{$books->links()}}
-        </ul>
+                </div>
+
+            </ul>
+        @endforeach
+        <div class="mt-3">{{$books->links()}}</div>
     </div>
 @endsection

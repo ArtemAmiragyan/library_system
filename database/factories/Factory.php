@@ -58,3 +58,14 @@ $factory->define(App\Review::class, function (Faker $faker) {
         'assessment' => random_int(0,5),
     ];
 });
+$factory->define(App\Favorites::class, function (Faker $faker) {
+    return [
+        'favorited_id' => function () {
+            return factory('App\Book')->create()->id;
+        },
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'favorited_type' => 'App\Book'
+    ];
+});
