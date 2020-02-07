@@ -104,12 +104,12 @@ class BooksController extends Controller
      * @param Book $book
      * @return Response
      */
-    public function destroy(Book $book, Review $review)
+    public function destroy(Book $book)
     {
-        $review->where('book_id', $book->id)->delete();
+        $book->reviews()->delete();
         $book->delete();
 
         return redirect('/books')
-            ->with('flash', 'Book has been deleted!');;
+            ->with('flash', "Book '{$book->title}' has been deleted!");
     }
 }

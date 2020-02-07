@@ -40,7 +40,7 @@ class CreateBookTest extends TestCase
     /** @test */
     function a_book_can_be_deleted()
     {
-        $book = factory('App\Book')->create();
+        $book = factory(Book::class)->create();
         $review = factory(Review::class)->create(['book_id' => $book->id]);
 
         $response = $this->delete("/books/{$book->id}");

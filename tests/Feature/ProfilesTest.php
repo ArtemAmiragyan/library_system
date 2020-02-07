@@ -21,7 +21,7 @@ class ProfilesTest extends TestCase
     }
 
     /** @test */
-    function profiles_display_all_reviews_created_by_the_associated_user()
+    function profiles_display_review_created_by_the_associated_user()
     {
         $user = factory(User::class)->create();
 

@@ -13,11 +13,9 @@ class ProfilesController extends Controller
      * @param User $user
      * @return Response
      */
-    public function show(User $user, Review $review)
+    public function show(User $user)
     {
-        $review = Review::query();
-
-        $userReviews = $review->where('user_id', $user->id)->paginate(1);
+        $userReviews = Review::where('user_id', $user->id)->paginate(1);
         return view('profiles.show', compact('userReviews', 'user'));
     }
 }

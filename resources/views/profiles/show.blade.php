@@ -12,7 +12,7 @@
         @foreach($userReviews as $review)
             <ul class="list-group mb-4">
                 <li class="list-group-item">
-                    <h5><a href="{{$review->book->path()}}"> {{$review->book->title}}</a></h5>
+                    <h5><a href="{{route('books.show', $review->book->id)}}"> {{$review->book->title}}</a></h5>
                 </li>
                 <li class="list-group-item">
                     <p>{{$review->body}}</p>
