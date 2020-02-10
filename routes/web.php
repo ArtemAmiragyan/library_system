@@ -23,6 +23,7 @@ Route::post('/books/{book}/', 'ReviewsController@store')->name('review');
 Route::delete('/reviews/{review}', 'ReviewsController@destroy')->name('review.delete');
 
 Route::post('/books/{book}/favorites', 'FavoritesController@store')->name('favorite');
+Route::delete('/books/{book}/favorites/delete', 'FavoritesController@destroy')->name('favorite.destroy');
 
 Auth::routes();
 

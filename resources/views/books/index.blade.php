@@ -28,14 +28,26 @@
                         <a class href="{{$book->path()}}">
                             <h2>{{$book->title}}</h2>
                         </a>
-                        <form method="POST" action="{{route('favorite', ['book' => $book->id])}}">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-light" {{$book->isFavorited() ? 'disabled' : '' }}>
-                                    {{ $book->favorites_count }} Favorite
-                                </button>
-                            </div>
-                        </form>
+                        @if($book->isFavorited())
+                            <form method="POST" action="{{route('favorite.destroy', ['book' => $book->id])}}">
+                                {{csrf_field()}}
+                                {{ method_field('DELETE') }}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light">
+                                        {{ $book->favorites_count }} Favorite
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <form method="POST" action="{{route('favorite', ['book' => $book->id])}}">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light">
+                                        {{ $book->favorites_count }} Favorite
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
                 <div class="list-group-item">

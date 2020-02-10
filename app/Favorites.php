@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Favorites extends Model
 {
-    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *

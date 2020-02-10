@@ -24,4 +24,17 @@ class FavoritesController extends Controller
         return back();
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Book $book
+     * @return RedirectResponse
+     */
+    public function destroy(Book $book)
+    {
+        $book->favorites()->where(['user_id' => auth()->id()])->delete();
+
+        return back();
+    }
+
 }
