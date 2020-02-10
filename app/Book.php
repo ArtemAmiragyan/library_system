@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Book extends Model
 {
     use SoftDeletes;
+    use Favoritable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,10 @@ class Book extends Model
         'title',
         'author_id',
         'description'
+    ];
+
+    protected $with = [
+        'favorites',
     ];
 
     /**
@@ -64,16 +69,6 @@ class Book extends Model
     }
 
     /**
-     * A book can be favorite
-     *
-     * @return MorphMany
-     */
-    public function favorites()
-    {
-        return $this->morphMany(Favorites::class, 'favorited');
-    }
-
-    /**
      * Add a review to the book.
      *
      * @param $review
@@ -83,30 +78,4 @@ class Book extends Model
         $this->reviews()->create($review);
     }
 
-    public function addToFavorites($userId)
-    {
-        $attrubutes = [
-            'favorited_id' => $this->id,
-            'user_id' => auth()->id(),
-        ];
-
-        if (!$this->favorites()->where(['favorited_id' => $this->id, 'user_id' => $userId])->exists()) {
-            $this->favorites()->create($attrubutes);
-        }
-    }
-
-    public function isFavorited()
-    {
-        return $this->favorites()->where('user_id', auth()->id())->exists();
-    }
-
-    /**
-     * Get the number of favorites for the reply.
-     *
-     * @return integer
-     */
-    public function getFavoritesCountAttribute()
-    {
-        return $this->favorites->count();
-    }
 }
