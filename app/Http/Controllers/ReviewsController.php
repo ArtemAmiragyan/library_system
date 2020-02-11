@@ -94,10 +94,15 @@ class ReviewsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Review $review
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Review $review)
     {
-        //
+        $this->authorize('delete', $review);
+
+        $review->delete();
+        return back()
+            ->with('flash', 'Review has been deleted!');;
     }
 }
