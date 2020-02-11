@@ -29,4 +29,16 @@ class StoreAuthor extends FormRequest
             'biography' => 'required|min:30',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'First name is empty!',
+            'first_name.max' => 'Too long first name!',
+            'last_name.required' => 'last name is empty!',
+            'last_name.max' => 'Too long last name!',
+            'biography.required' => 'Biography is empty!',
+            'biography.min' => 'Too short biography!',
+        ];
+    }
 }

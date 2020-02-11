@@ -37,13 +37,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the route key name for Laravel
-     *
-     * @return string
-     */
-    public function getRouteKeyName():string
-    {
-        return 'name';
-    }
 }

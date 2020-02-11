@@ -34,22 +34,6 @@
         </div>
 
         <h4 class="text-center">Reviews</h4>
-        @foreach($book->reviews as $review)
-            <ul class="list-group m-4">
-                <li class="list-group-item break-word">
-                    <div class="row">
-                        <h6>{{$review->owner->name}}</h6>
-                    </div>
-                </li>
-                <li class="list-group-item break-word">
-                    {{$review->body}}<br>
-                    <small>assessment: {{$review->assessment}}</small>
-                </li>
-                <li class="list-group-item break-word">
-                    <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
-                </li>
-            </ul>
-        @endforeach
 
         @if (auth()->check())
             <div class="column">
@@ -62,7 +46,8 @@
                     </div>
                     <h6>Leave a rating!</h6>
                     <div class="form-group">
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="assessment">
+                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref"
+                                name="assessment">
                             <option value="">Choose...</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -74,7 +59,9 @@
                     <button type="submit" class="btn btn-light">Post</button>
                 </form>
             </div>
+
             @if (count($errors) > 0)
+                <flash-error></flash-error>
                 <div class="alert alert-danger m-4">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -86,5 +73,36 @@
         @else
             <p>Please <a href="{{route('login')}}">sign in </a>to write a review</p>
         @endif
+        @forelse($book->reviews as $review)
+            <ul class="list-group m-4">
+                <li class="list-group-item break-word">
+                    <div class="row">
+                        <h6>
+                            <a href="{{route('profile', $review->owner->id)}}">
+                                {{$review->owner->name}}
+                            </a>
+                        </h6>
+                    </div>
+                </li>
+                <li class="list-group-item break-word">
+                    {{$review->body}}<br>
+                    <small>assessment: {{$review->assessment}}</small>
+                </li>
+                <li class="list-group-item break-word">
+                    <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
+                </li>
+                @can('delete', $review)
+                    <form action="{{route('review.delete', ['review' => $review->id])}}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+
+                        <button type="submit" class="btn btn-link">Delete</button>
+                    </form>
+                @endcan
+            </ul>
+        @empty
+            <p class="text-center mt-5">There are no reviews yet. You can be the first!</p>
+        @endforelse
+
     </div>
 @endsection

@@ -30,6 +30,7 @@
             <button type="submit" class="btn btn-secondary">Publish</button>
         </form>
         @if (count($errors) > 0)
+            <flash-error></flash-error>
             <div class="alert alert-danger m-4">
                 <ul>
                     @foreach ($errors->all() as $error)

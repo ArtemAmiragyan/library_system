@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
             $table->integer('user_id');
             $table->text('body');
             $table->integer('assessment');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -35,30 +35,6 @@ class ReadBooksTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_read_reviews_that_are_associated_with_a_book()
-    {
-        $review = factory(Review::class)->create([
-            'book_id' => $this->book->id,
-        ]);
-
-        $this->get("/books/{$this->book->id}")
-            ->assertSee($review->body);
-    }
-
-    /** @test */
-    function a_user_can_create_new_review()
-    {
-        $this->signIn();
-
-        $review = factory(Review::class)->make();
-        $this->post("/books/{$this->book->id}/",$review->toArray());
-
-        $this->get("/books/{$this->book->id}")
-            ->assertSee($review->body);
-
-    }
-
-    /** @test */
     function a_user_can_search_books()
     {
         $notRequiredBook = factory(Book::class)->create(['title' => 'not required']);

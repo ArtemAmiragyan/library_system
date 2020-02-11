@@ -29,4 +29,16 @@ class StoreBook extends FormRequest
             'author_id' => 'required|exists:authors,id',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title is empty!',
+            'title.max' => 'Too long title!',
+            'description.required' => 'Description is empty!',
+            'description.min' => 'Too short description!',
+            'author_id.required' => 'Choose the author!',
+            'author_id.exists' => 'There is no such author, you can create a new one!'
+        ];
+    }
 }

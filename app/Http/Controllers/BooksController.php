@@ -51,7 +51,8 @@ class BooksController extends Controller
     {
         $book = Book::create($request->all());
 
-        return redirect($book->path());
+        return redirect($book->path())
+            ->with('flash', 'Book has been published!');
     }
 
     /**
@@ -64,8 +65,6 @@ class BooksController extends Controller
     public function show(Book $book, Review $review)
     {
         $assessment = null;
-
-        $review = Review::query();
 
         $assessment = round($review->where('book_id', $book->id)->average('assessment'));
 
@@ -95,7 +94,8 @@ class BooksController extends Controller
     {
         $book->update($request->all());
 
-        return redirect($book->path());
+        return redirect($book->path())
+            ->with('flash', 'Book has been updated!');
     }
 
     /**
@@ -106,8 +106,10 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
+        $book->reviews()->delete();
         $book->delete();
 
-        return redirect('/books');
+        return redirect('/books')
+            ->with('flash', "Book '{$book->title}' has been deleted!");
     }
 }

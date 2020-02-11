@@ -52,13 +52,14 @@ class ReviewsController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return back();
+        return back()
+            ->with('flash', 'Review has been published!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function show(Review $review)
@@ -69,7 +70,7 @@ class ReviewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function edit(Review $review)
@@ -80,8 +81,8 @@ class ReviewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Review $review)
@@ -92,11 +93,16 @@ class ReviewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
+     * @param \App\Review $review
+     * @return RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Review $review)
     {
-        //
+        $this->authorize('delete', $review);
+
+        $review->delete();
+        return back()
+            ->with('flash', 'Review has been deleted!');;
     }
 }

@@ -28,4 +28,14 @@ class ReviewStore extends FormRequest
             'assessment' => 'required|integer|between:1,5'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'body.required' => 'Your review is empty!',
+            'body.min' => 'Too short review!',
+            'assessment.required' => 'Rate the book!',
+            'assessment.between' => 'The assessment should be in the range of 1 before 5.',
+        ];
+    }
 }
