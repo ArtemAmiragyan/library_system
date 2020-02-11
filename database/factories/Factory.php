@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Author;
+use App\Book;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -49,10 +50,10 @@ $factory->define(App\Book::class, function (Faker $faker) {
 $factory->define(App\Review::class, function (Faker $faker) {
     return [
         'book_id' => function () {
-            return factory('App\Book')->create()->id;
+            return factory(Book::class)->create()->id;
         },
         'user_id' => function () {
-            return factory('App\User')->create()->id;
+            return factory(User::class)->create()->id;
         },
         'body' => $faker->paragraph,
         'assessment' => random_int(0,5),
@@ -61,10 +62,10 @@ $factory->define(App\Review::class, function (Faker $faker) {
 $factory->define(App\Favorites::class, function (Faker $faker) {
     return [
         'favorited_id' => function () {
-            return factory('App\Book')->create()->id;
+            return factory(Book::class)->create()->id;
         },
         'user_id' => function () {
-            return factory('App\User')->create()->id;
+            return factory(User::class)->create()->id;
         },
         'favorited_type' => 'App\Book'
     ];

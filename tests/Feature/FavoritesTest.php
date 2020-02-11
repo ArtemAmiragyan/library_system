@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Book;
+use App\Favorites;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -27,7 +28,7 @@ class FavoritesTest extends TestCase
 
         $book = factory(Book::class)->create();
 
-        $this->post('books/' . $book->id . '/favorites');
+        $this->post("books/{$book->id}/favorites");
 
         $this->assertCount(1, $book->favorites);
     }
@@ -37,15 +38,27 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $book = factory('App\Book')->create();
+        $book = factory(Book::class)->create();
+
+        $this->post("books/{$book->id}/favorites");
 
         try {
-            $this->post('books/' . $book->id . '/favorites');
-            $this->post('books/' . $book->id . '/favorites');
+            $this->post("books/{$book->id}/favorites");
         } catch (\Exception $e) {
             $this->fail('Did not expect to insert the same record set twice.');
         }
 
         $this->assertCount(1, $book->favorites);
+    }
+
+    /** @test */
+    function authorized_users_can_delete_reviews()
+    {
+        $this->signIn();
+        $book = factory(Book::class)->create();
+        $favorite = factory(Favorites::class)->create(['user_id' => auth()->id(), 'favorited_id' => $book->id]);
+
+        $this->delete("/books/{$book->id}/favorites/delete");
+        $this->assertDatabaseMissing('favorites', ['id' => $favorite->id]);
     }
 }
