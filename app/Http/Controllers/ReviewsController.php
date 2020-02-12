@@ -79,15 +79,17 @@ class ReviewsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update an existing review.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Review $review
-     * @return \Illuminate\Http\Response
+     * @param Review $review
      */
-    public function update(Request $request, Review $review)
+    public function update(Review $review)
     {
-        //
+        $this->authorize('update', $review);
+
+        $this->validate(request(), ['body' => 'required']);
+
+        $review->update(request(['body', 'assessment']));
     }
 
     /**
