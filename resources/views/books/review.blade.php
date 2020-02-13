@@ -19,12 +19,12 @@
                 </div>
                 <h6>Rating:</h6>
                 <div class="form-group">
-                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" v-model="assessment" @change="assessment">
-                        <option v-bind:value="1">1</option>
-                        <option v-bind:value="2">2</option>
-                        <option v-bind:value="3">3</option>
-                        <option v-bind:value="4">4</option>
-                        <option v-bind:value="5">5</option>
+                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" v-model="assessment">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
 

@@ -83,13 +83,11 @@ class ReviewsController extends Controller
      *
      * @param Review $review
      */
-    public function update(Review $review)
+    public function update(ReviewStore $request, Review $review)
     {
         $this->authorize('update', $review);
 
-        $this->validate(request(), ['body' => 'required']);
-
-        $review->update(request(['body', 'assessment']));
+        $review->update($request->all());
     }
 
     /**

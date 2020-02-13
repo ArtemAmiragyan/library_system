@@ -21,7 +21,7 @@ class BooksController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request, Review $review)
+    public function index(Request $request)
     {
         $books = Book::query();
 

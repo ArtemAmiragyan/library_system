@@ -14,7 +14,7 @@
 
         methods: {
             update() {
-                axios.patch('/reviews/' + this.review.id, {
+                axios.patch(`/reviews/${this.review.id}`, {
                     body: this.body,
                     assessment: this.assessment,
                 });
@@ -22,7 +22,7 @@
                 flash('Review is updated!')
             },
             destroy() {
-                axios.delete('/reviews/' + this.review.id);
+                axios.delete(`/reviews/${this.review.id}` );
 
                 setTimeout(() => {
                     $(this.$el).remove();
