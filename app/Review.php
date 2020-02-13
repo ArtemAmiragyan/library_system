@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Review extends Model
 {
     use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -6,6 +6,7 @@ use App\Author;
 use App\Book;
 use App\Http\Requests\Book\StoreBook;
 use App\Review;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\Book\UpdateBookRequest;
 use Illuminate\Http\Response;
@@ -45,7 +46,7 @@ class BooksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreBook $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(StoreBook $request)
     {
@@ -88,7 +89,7 @@ class BooksController extends Controller
      *
      * @param UpdateBookRequest $request
      * @param Book $book
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(StoreBook $request, Book $book)
     {
@@ -102,7 +103,7 @@ class BooksController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Book $book
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Book $book)
     {
