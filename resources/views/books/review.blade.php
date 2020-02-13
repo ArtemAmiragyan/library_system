@@ -42,13 +42,7 @@
         @can ('delete', $review)
             <li class="list-group-item level">
                 <button class="btn btn-link mr-1" @click="editing = true">Edit</button>
-
-                <form method="POST" action="{{route('review.delete', $review->id)}}">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-
-                    <button type="submit" class="btn btn-link btn-xs">Delete</button>
-                </form>
+                <button class="btn btn-link" @click="destroy">Delete</button>
             </li>
         @endcan
     </ul>

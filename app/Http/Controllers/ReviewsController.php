@@ -104,7 +104,5 @@ class ReviewsController extends Controller
         $this->authorize('delete', $review);
 
         $review->delete();
-        return back()
-            ->with('flash', 'Review has been deleted!');;
     }
 }
