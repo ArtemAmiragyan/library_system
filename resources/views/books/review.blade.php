@@ -32,9 +32,8 @@
                 <button class="btn btn-xs btn-link" @click="editing = false">Cancel</button>
             </div>
 
-            <div v-else>
-                {{$review->body}}
-            </div>
+            <div v-else v-text="body"></div>
+
         </li>
 
         <li class="list-group-item break-word">
