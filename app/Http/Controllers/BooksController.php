@@ -6,9 +6,13 @@ use App\Author;
 use App\Book;
 use App\Http\Requests\Book\StoreBook;
 use App\Review;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\Book\UpdateBookRequest;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class BooksController extends Controller
 {
@@ -45,7 +49,7 @@ class BooksController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreBook $request
-     * @return Response
+     * @return RedirectResponse|Redirector
      */
     public function store(StoreBook $request)
     {
@@ -60,7 +64,7 @@ class BooksController extends Controller
      *
      * @param Book $book
      * @param Review $review
-     * @return Response
+     * @return Factory|View
      */
     public function show(Book $book, Review $review)
     {
@@ -75,7 +79,7 @@ class BooksController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Book $book
-     * @return Response
+     * @return Factory|View
      */
     public function edit(Book $book)
     {
@@ -86,9 +90,9 @@ class BooksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateBookRequest $request
+     * @param StoreBook $request
      * @param Book $book
-     * @return Response
+     * @return RedirectResponse|Redirector
      */
     public function update(StoreBook $request, Book $book)
     {
@@ -102,7 +106,8 @@ class BooksController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Book $book
-     * @return Response
+     * @return RedirectResponse|Redirector
+     * @throws Exception
      */
     public function destroy(Book $book)
     {

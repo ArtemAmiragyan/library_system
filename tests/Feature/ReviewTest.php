@@ -61,7 +61,6 @@ class ReviewTest extends TestCase
             ->delete("reviews/{$review->id}")
             ->assertStatus(403);
     }
-
     /** @test */
     function authorized_users_can_delete_reviews()
     {
@@ -70,5 +69,18 @@ class ReviewTest extends TestCase
 
         $this->delete("/reviews/{$review->id}");
         $this->seeIsSoftDeletedInDatabase('reviews', ['id' => $review->id]);
+    }
+
+    /** @test */
+    function authorized_users_can_update_replies()
+    {
+        $this->signIn();
+
+        $review = factory(Review::class)->create(['user_id' => auth()->id()]);
+
+        $updatedReview = 'You been changed, fool.';
+        $this->patch("/reviews/{$review->id}", ['body' => $updatedReview]);
+
+        $this->assertDatabaseHas('reviews', ['id' => $review->id, 'body' => $updatedReview]);
     }
 }

@@ -14,16 +14,15 @@ window.Vue = require('vue');
  * components and automatically register them with their "basename".
  *
  */
-
 Vue.component('flash-success', require('./components/FlashSuccess.vue').default);
 Vue.component('flash-error', require('./components/FlashError.vue').default);
+Vue.component('review', require('./components/Review.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 const app = new Vue({
     el: '#app',
 });
