@@ -79,15 +79,15 @@ class ReviewsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update an existing review.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Review $review
-     * @return \Illuminate\Http\Response
+     * @param Review $review
      */
-    public function update(Request $request, Review $review)
+    public function update(ReviewStore $request, Review $review)
     {
-        //
+        $this->authorize('update', $review);
+
+        $review->update($request->all());
     }
 
     /**
@@ -102,7 +102,5 @@ class ReviewsController extends Controller
         $this->authorize('delete', $review);
 
         $review->delete();
-        return back()
-            ->with('flash', 'Review has been deleted!');;
     }
 }

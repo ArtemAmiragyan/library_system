@@ -73,36 +73,8 @@
         @else
             <p>Please <a href="{{route('login')}}">sign in </a>to write a review</p>
         @endif
-        @forelse($book->reviews as $review)
-            <ul class="list-group m-4">
-                <li class="list-group-item break-word">
-                    <div class="row">
-                        <h6>
-                            <a href="{{route('profile', $review->owner->id)}}">
-                                {{$review->owner->name}}
-                            </a>
-                        </h6>
-                    </div>
-                </li>
-                <li class="list-group-item break-word">
-                    {{$review->body}}<br>
-                    <small>assessment: {{$review->assessment}}</small>
-                </li>
-                <li class="list-group-item break-word">
-                    <small class="text-muted"> {{ $review->created_at->diffForHumans() }}... </small>
-                </li>
-                @can('delete', $review)
-                    <form action="{{route('review.delete', ['review' => $review->id])}}" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-
-                        <button type="submit" class="btn btn-link">Delete</button>
-                    </form>
-                @endcan
-            </ul>
-        @empty
-            <p class="text-center mt-5">There are no reviews yet. You can be the first!</p>
-        @endforelse
-
+        @foreach($book->reviews as $review)
+            @include('books.review')
+        @endforeach
     </div>
 @endsection

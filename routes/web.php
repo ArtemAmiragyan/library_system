@@ -19,13 +19,13 @@ Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'cr
 
 Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index', 'store', 'destroy', 'edit', 'update']]);
 
-Route::post('/books/{book}/', 'ReviewsController@store')->name('review');
+Route::post('/reviews/{book}/', 'ReviewsController@store')->name('review');
 Route::delete('/reviews/{review}', 'ReviewsController@destroy')->name('review.delete');
-
-Route::post('/books/{book}/favorites', 'FavoritesController@store')->name('favorite');
-Route::delete('/books/{book}/favorites/delete', 'FavoritesController@destroy')->name('favorite.destroy');
-
+Route::patch('/reviews/{review}', 'ReviewsController@update');
 Auth::routes();
 
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/books/{book}/favorites', 'FavoritesController@store')->name('favorite');
+Route::delete('/books/{book}/favorites/delete', 'FavoritesController@destroy')->name('favorite.destroy');
