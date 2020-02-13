@@ -20,18 +20,42 @@
             </div>
         </form>
 
-        <ul class="list-group">
-            @foreach($books as $book)
-                <li class="list-group-item">
-                    <a href="{{$book->path()}}">
-                        <h2>{{$book->title}}</h2>
-                    </a>
-                </li>
-                <li class="list-group-item">
+
+        @foreach($books as $book)
+            <ul class="list-group mt-3">
+                <div class="list-group-item flex-column">
+                    <div class="d-flex justify-content-between">
+                        <a class href="{{$book->path()}}">
+                            <h2>{{$book->title}}</h2>
+                        </a>
+                        @if($book->isFavorited())
+                            <form method="POST" action="{{route('favorite.destroy', ['book' => $book->id])}}">
+                                {{csrf_field()}}
+                                {{ method_field('DELETE') }}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light">
+                                        {{ $book->favorites_count }} Favorite
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <form method="POST" action="{{route('favorite', ['book' => $book->id])}}">
+                                {{csrf_field()}}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-light">
+                                        {{ $book->favorites_count }} Favorite
+                                    </button>
+                                </div>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+                <div class="list-group-item">
                     <p>{{$book->shortDescription}}...</p>
-                </li>
-            @endforeach
-            {{$books->links()}}
-        </ul>
+                </div>
+
+            </ul>
+        @endforeach
+        <div class="mt-3">{{$books->links()}}</div>
     </div>
 @endsection

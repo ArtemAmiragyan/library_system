@@ -23,5 +23,16 @@
             </ul>
         @endforeach
         {{$userReviews->links()}}
+
+        <h4>{{$user->name}}'s favorite books:</h4>
+        <ul class="list-group list-group-flush">
+            @foreach($books as $book)
+                @if($book->isFavorited())
+                    <li class="list-group-item">
+                        <h5><a href="{{route('books.show', $book->id)}}"> {{$book->title}}</a></h5>
+                    </li>
+                @endif
+            @endforeach
+        </ul>
     </div>
 @endsection
