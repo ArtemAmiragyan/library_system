@@ -28,6 +28,8 @@ class Book extends Model
         'favorites',
     ];
 
+    protected $appends = ['favoritesCount', 'isFavorited'];
+
     /**
      * Get a string path for the book.
      *
