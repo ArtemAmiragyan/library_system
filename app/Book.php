@@ -39,16 +39,6 @@ class Book extends Model
     }
 
     /**
-     * Get a short description for view.
-     *
-     * @return string
-     */
-    public function getShortDescriptionAttribute(): string
-    {
-        return mb_substr($this->description, 0, 60);
-    }
-
-    /**
      * A book may have many reviews.
      *
      * @return HasMany
