@@ -12,6 +12,7 @@
         name: "Favorite",
 
         props: ['book'],
+
         data() {
             return {
                 favoritesCount: this.book.favoritesCount,
@@ -21,7 +22,8 @@
 
         computed: {
             classes() {
-                return [ 'btn',
+                return [
+                    'btn',
                     'btn-rounded',
                     this.isFavorited ? 'btn-secondary ' : 'btn-default'
                 ];
@@ -34,17 +36,25 @@
             },
 
             create() {
-                axios.post('/books/' + this.book.id + '/favorites/');
-
-                this.isFavorited = true;
-                this.favoritesCount++;
+                axios.post(`/books/${this.book.id}/favorites/`)
+                    .then(() => {
+                        this.isFavorited = true;
+                        this.favoritesCount++;
+                    })
+                    .catch((error) => {
+                        alert(`Whoops ${error}`)
+                    });
             },
 
             destroy() {
-                axios.delete('/books/' + this.book.id + '/favorites/delete');
-
-                this.isFavorited = false;
-                this.favoritesCount--;
+                axios.delete(`/books/${this.book.id}/favorites//delete`)
+                    .then(() => {
+                        this.isFavorited = false;
+                        this.favoritesCount--;
+                    })
+                    .catch((error) => {
+                        alert(`Whoops ${error}`)
+                    });
             },
         }
     }

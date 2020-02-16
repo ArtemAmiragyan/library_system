@@ -15,20 +15,31 @@
         methods: {
             update() {
                 axios.patch(`/reviews/${this.review.id}`, {
-                    body: this.body,
-                    assessment: this.assessment,
-                });
-                this.editing = false;
-                flash('Review is updated!')
+                        body: this.body,
+                        assessment: this.assessment,
+                    })
+                    .then(() => {
+                        flash('Review is updated!');
+                        this.editing = false;
+                    })
+                    .catch((error) => {
+                        alert(`Whoops! ${error}`);
+                        this.editing = true;
+                    });
             },
+
             destroy() {
-                axios.delete(`/reviews/${this.review.id}` );
+                axios.delete(`/reviews/${this.review.id}`)
+                    .then(() => {
+                        flash('Your reply has been deleted.');
 
-                setTimeout(() => {
-                    $(this.$el).remove();
-                }, 100);
-
-                flash('Your reply has been deleted.');
+                        setTimeout(() => {
+                            $(this.$el).remove();
+                        }, 100);
+                    })
+                    .catch((error) => {
+                        alert(`Whoops! ${error}`);
+                    });
             }
         }
     }
