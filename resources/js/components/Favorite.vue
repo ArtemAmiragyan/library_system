@@ -42,18 +42,22 @@
                         this.favoritesCount++;
                     })
                     .catch((error) => {
-                        alert(`Whoops ${error}`)
+                        if (error.response.status === 401) {
+                            window.location.href = '/login'
+                        } else {
+                            flash(`Whoops ${error}`, 'danger');
+                        }
                     });
             },
 
             destroy() {
-                axios.delete(`/books/${this.book.id}/favorites//delete`)
+                axios.delete(`/books/${this.book.id}/favorites/delete`)
                     .then(() => {
                         this.isFavorited = false;
                         this.favoritesCount--;
                     })
                     .catch((error) => {
-                        alert(`Whoops ${error}`)
+                        flash(`Whoops ${error}`, 'danger');
                     });
             },
         }

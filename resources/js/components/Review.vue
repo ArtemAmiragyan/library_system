@@ -23,22 +23,18 @@
                         this.editing = false;
                     })
                     .catch((error) => {
-                        alert(`Whoops! ${error}`);
-                        this.editing = true;
+                        flash(`Whoops! ${error}`,'danger');
                     });
             },
 
             destroy() {
                 axios.delete(`/reviews/${this.review.id}`)
                     .then(() => {
-                        flash('Your reply has been deleted.');
-
-                        setTimeout(() => {
-                            $(this.$el).remove();
-                        }, 100);
+                        flash('Your review has been deleted.');
+                        $(this.$el).remove();
                     })
                     .catch((error) => {
-                        alert(`Whoops! ${error}`);
+                        flash(`Whoops! ${error}`, 'danger');
                     });
             }
         }

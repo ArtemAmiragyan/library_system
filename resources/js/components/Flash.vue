@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-success alert-flash" role="alert" v-show="show">
-        <strong>Success!</strong> {{ body }}
+    <div :class="['alert', `alert-${type}`, 'alert-flash']" role="alert" v-show="show">
+        {{ body }}
     </div>
 </template>
 
@@ -20,13 +20,17 @@
                 this.flash(this.message);
             }
             window.events.$on(
-                'flash', message => this.flash(message)
+                'flash',
+                (message, type) => {
+                    this.flash(message, type)
+                }
             );
         },
 
         methods: {
-            flash(message) {
+            flash(message, type = 'success') {
                 this.body = message;
+                this.type = type;
                 this.show = true;
                 this.hide();
             },

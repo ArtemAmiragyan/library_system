@@ -19,6 +19,7 @@
     .search-wrapper {
         position: relative;
     }
+    
     label {
         position: absolute;
         font-size: 12px;

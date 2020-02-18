@@ -21,7 +21,6 @@ class FavoritesController extends Controller
     public function store(Book $book)
     {
         $book->addToFavorites(auth()->id());
-        return back();
     }
 
     /**
@@ -33,8 +32,6 @@ class FavoritesController extends Controller
     public function destroy(Book $book)
     {
         $book->favorites()->where(['user_id' => auth()->id()])->delete();
-
-        return back();
     }
 
 }
