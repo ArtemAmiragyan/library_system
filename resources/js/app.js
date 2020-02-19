@@ -17,7 +17,7 @@ window.Vue = require('vue');
 Vue.component('flash-success', require('./components/Flash.vue').default);
 Vue.component('flash-error', require('./components/FlashError.vue').default);
 Vue.component('review', require('./components/Review.vue').default);
-Vue.component('book', require('./components/Book.vue').default)
+Vue.component('book', require('./components/Book.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);
 
 /**
@@ -26,5 +26,5 @@ Vue.component('favorite', require('./components/Favorite.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 });
