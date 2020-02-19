@@ -5,7 +5,7 @@
         <a :href="path">
           <h2>{{book.title}}</h2>
         </a>
-        <favorite :book="book"></favorite>
+        <favorite :book="book"/>
       </div>
     </div>
     <div class="list-group-item">
@@ -29,13 +29,5 @@
         shortDescription: this.book.description.substring(0, 200),
       }
     },
-
-    computed: {
-      filtered() {
-        return this.book.filter(book => {
-          return this.book.title.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-    }
   }
 </script>

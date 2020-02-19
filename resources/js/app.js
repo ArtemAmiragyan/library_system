@@ -18,6 +18,7 @@ Vue.component('flash-success', require('./components/Flash.vue').default);
 Vue.component('flash-error', require('./components/FlashError.vue').default);
 Vue.component('review', require('./components/Review.vue').default);
 Vue.component('book', require('./components/Book.vue').default);
+Vue.component('books', require('./components/Books.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);
 
 /**
