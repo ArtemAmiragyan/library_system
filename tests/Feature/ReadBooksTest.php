@@ -21,10 +21,10 @@ class ReadBooksTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_view_all_books()
+    public function a_user_can_visit_books_page()
     {
         $this->get('/books')
-            ->assertSee($this->book->title);
+            ->assertViewIs('books.index');
     }
 
     /** @test */
@@ -35,17 +35,9 @@ class ReadBooksTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_search_books()
+    function a_user_can_get_all_books_for_search()
     {
-        $notRequiredBook = factory(Book::class)->create(['title' => 'not required']);
-        $requiredBook = factory(Book::class)->create(['title' => 'foobar']);
-
-        $this->get('/books?book=foobar')
-            ->assertSee($requiredBook->title)
-            ->assertDontSee($notRequiredBook->title);
-
-        $this->get('/books?book=foo')
-            ->assertSee($requiredBook->title)
-            ->assertDontSee($notRequiredBook->title);
+        $this->get('/getBooks')
+            ->assertJson([]);
     }
 }

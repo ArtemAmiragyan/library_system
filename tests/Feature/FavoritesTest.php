@@ -29,26 +29,8 @@ class FavoritesTest extends TestCase
         $book = factory(Book::class)->create();
 
         $this->post("books/{$book->id}/favorites");
+        $this->assertDatabaseHas('favorites', ['favorited_id' => $book->id]);
 
-        $this->assertCount(1, $book->favorites);
-    }
-
-    /** @test */
-    function an_authenticated_user_may_only_favorite_a_book_once()
-    {
-        $this->signIn();
-
-        $book = factory(Book::class)->create();
-
-        $this->post("books/{$book->id}/favorites");
-
-        try {
-            $this->post("books/{$book->id}/favorites");
-        } catch (\Exception $e) {
-            $this->fail('Did not expect to insert the same record set twice.');
-        }
-
-        $this->assertCount(1, $book->favorites);
     }
 
     /** @test */

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Reviews\ReviewStore;
 use App\Review;
 use App\Book;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -16,26 +17,6 @@ class ReviewsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -57,31 +38,10 @@ class ReviewsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param \App\Review $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Review $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
      * Update an existing review.
      *
      * @param Review $review
+     * @throws AuthorizationException
      */
     public function update(ReviewStore $request, Review $review)
     {

@@ -21,7 +21,7 @@ class BooksController extends Controller
      *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('books.index');
     }

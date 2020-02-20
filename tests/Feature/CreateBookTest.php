@@ -19,8 +19,7 @@ class CreateBookTest extends TestCase
         ]);
 
         $this->post('/books', $book->toArray());
-        $this->get("/books/{$book->id}")
-            ->assertSee('Some Title');
+        $this->assertDatabaseHas('books', ['title' => 'Some Title']);
     }
 
     /** @test */

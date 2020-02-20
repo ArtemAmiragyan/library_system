@@ -15,9 +15,6 @@
 
 <script>
   import axios from 'axios';
-  import Book from './Book.vue';
-
-  ;
 
   export default {
     name: "Books",
