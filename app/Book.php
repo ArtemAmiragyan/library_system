@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
     use SoftDeletes;
     use Favoritable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,8 @@ class Book extends Model
         'favorites',
     ];
 
+    protected $appends = ['favoritesCount', 'isFavorited'];
+
     /**
      * Get a string path for the book.
      *
@@ -36,16 +40,6 @@ class Book extends Model
     public function path(): string
     {
         return '/books/' . $this->id;
-    }
-
-    /**
-     * Get a short description for view.
-     *
-     * @return string
-     */
-    public function getShortDescriptionAttribute(): string
-    {
-        return mb_substr($this->description, 0, 60);
     }
 
     /**

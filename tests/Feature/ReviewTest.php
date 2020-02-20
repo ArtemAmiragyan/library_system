@@ -5,9 +5,6 @@ namespace Tests\Feature;
 use App\Book;
 use App\Review;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class ReviewTest extends TestCase
@@ -40,10 +37,10 @@ class ReviewTest extends TestCase
         $this->signIn();
 
         $review = factory(Review::class)->make();
-        $this->post("/books/{$this->book->id}/", $review->toArray());
 
-        $this->get("/books/{$this->book->id}")
-            ->assertSee($review->body);
+        $this->post("/reviews/{$this->book->id}/", $review->toArray());
+
+        $this->assertDatabaseHas('reviews', ['book_id' => $this->book->id]);
 
     }
 
@@ -61,11 +58,12 @@ class ReviewTest extends TestCase
             ->delete("reviews/{$review->id}")
             ->assertStatus(403);
     }
+
     /** @test */
     function authorized_users_can_delete_reviews()
     {
         $this->signIn();
-        $review = factory('App\Review')->create(['user_id' => auth()->id()]);
+        $review = factory(Review::class)->create(['user_id' => auth()->id()]);
 
         $this->delete("/reviews/{$review->id}");
         $this->seeIsSoftDeletedInDatabase('reviews', ['id' => $review->id]);
@@ -76,11 +74,21 @@ class ReviewTest extends TestCase
     {
         $this->signIn();
 
-        $review = factory(Review::class)->create(['user_id' => auth()->id()]);
+        $review = factory(Review::class)->create([
+            'book_id' => $this->book->id,
+            'user_id' => auth()->id(),
+        ]);
 
-        $updatedReview = 'You been changed, fool.';
-        $this->patch("/reviews/{$review->id}", ['body' => $updatedReview]);
+        $this->patch("reviews/{$review->id}", [
+            'body' => 'Changed body for review',
+            'assessment' => '1',
+        ])
+        ->assertStatus(200);
 
-        $this->assertDatabaseHas('reviews', ['id' => $review->id, 'body' => $updatedReview]);
+        $this->assertDatabaseHas('reviews', [
+            'id' => $review->id,
+            'body' => 'Changed body for review',
+            'assessment' => '1',
+        ]);
     }
 }

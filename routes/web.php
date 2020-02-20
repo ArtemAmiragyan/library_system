@@ -19,6 +19,8 @@ Route::resource('authors', 'AuthorsController', ['only' => ['index', 'show', 'cr
 
 Route::resource('books', 'BooksController', ['only' => ['create', 'show', 'index', 'store', 'destroy', 'edit', 'update']]);
 
+Route::get('getBooks', 'BooksController@getBooks');
+
 Route::post('/reviews/{book}/', 'ReviewsController@store')->name('review');
 Route::delete('/reviews/{review}', 'ReviewsController@destroy')->name('review.delete');
 Route::patch('/reviews/{review}', 'ReviewsController@update');
@@ -29,3 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/books/{book}/favorites', 'FavoritesController@store')->name('favorite');
 Route::delete('/books/{book}/favorites/delete', 'FavoritesController@destroy')->name('favorite.destroy');
+
+Route::get('search', [
+    'as' => 'books.search',
+    'uses' => 'SearchController@search'
+]);

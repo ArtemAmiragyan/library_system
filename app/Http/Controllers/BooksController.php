@@ -19,18 +19,11 @@ class BooksController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $books = Book::query();
-
-        if ($request->has('book')) {
-            $books = $books->where('title', 'LIKE', trim($request->input('book')) . '%');
-        }
-
-        $books = $books->paginate(5);
-        return view('books.index', compact('books'));
+        return view('books.index');
     }
 
     /**
@@ -116,5 +109,10 @@ class BooksController extends Controller
 
         return redirect('/books')
             ->with('flash', "Book '{$book->title}' has been deleted!");
+    }
+
+    public function getBooks()
+    {
+        return Book::all();
     }
 }

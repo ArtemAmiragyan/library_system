@@ -1,28 +1,39 @@
 <template>
-  <div class="alert alert-danger alert-flash" role="alert" v-show="show">
-    <strong>Whops!</strong> Try again!
+  <div :class="['alert', `alert-${type}`, 'alert-flash']" role="alert" v-show="show">
+    {{ body }}
   </div>
 </template>
 
 <script>
   export default {
+    props: ['message'],
+    
     data() {
       return {
         body: '',
         show: false
       }
     },
-
+    
     created() {
-      this.flash(this.message);
+      if (this.message) {
+        this.flash(this.message);
+      }
+      window.events.$on(
+        'flash',
+        (message, type) => {
+          this.flash(message, type)
+        }
+      );
     },
-
+    
     methods: {
-      flash() {
+      flash(message, type = 'success') {
+        this.body = message;
+        this.type = type;
         this.show = true;
         this.hide();
       },
-
       hide() {
         setTimeout(() => {
           this.show = false;
