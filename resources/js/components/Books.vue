@@ -7,9 +7,7 @@
       <button class="btn btn-default" type="button" disabled="disabled" v-if="loading">Searching...
       </button>
     </div>
-    <div v-for="book in books">
-      <book :book="book"></book>
-    </div>
+    <paginated-books :books="books"/>
   </div>
 </template>
 
