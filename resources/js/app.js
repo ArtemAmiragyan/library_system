@@ -20,7 +20,7 @@ Vue.component('review', require('./components/Review.vue').default);
 Vue.component('book', require('./components/Book.vue').default);
 Vue.component('books', require('./components/Books.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);
-
+Vue.component('paginated-books', require('./components/PaginatedBooks.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
