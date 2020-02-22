@@ -79,10 +79,7 @@
 
     computed: {
       pageCount() {
-        let l = this.books.length,
-          s = this.size;
-
-        return Math.ceil(l / s);
+        return Math.ceil(this.books.length / this.size);
       },
 
       paginatedData() {
